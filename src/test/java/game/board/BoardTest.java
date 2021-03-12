@@ -33,8 +33,5 @@ public class BoardTest {
 
         //then
         Assert.assertEquals(outputStream.toString(), expected, "Boards should be equals");
-
-
-
     }
 }
