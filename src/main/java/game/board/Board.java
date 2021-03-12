@@ -1,7 +1,7 @@
 package game.board;
 
 import static java.util.stream.Collectors.joining;
-import static java.util.stream.Stream.generate;
+import static java.util.stream.IntStream.rangeClosed;
 
 class Board {
 
@@ -21,6 +21,8 @@ class Board {
     }
 
     String createHeader(int columns) {
-        return generate(() -> "x").limit(columns).collect(joining(" "));
+        return rangeClosed(1, columns)
+                .mapToObj(String::valueOf)
+                .collect(joining(" "));
     }
 }
