@@ -62,4 +62,30 @@ public class BoardTest {
             {11, "1 2 3 4 5 6 7 8 9 10 11"},
         };
     }
+
+    @Test(dataProvider = "asciiCodes")
+    public void createRow_returnRowAsString_forGivenSizeAndAsciiCode(int asciiCode, String expected) {
+        //given
+        int columns = 10;
+
+        //when
+        String actual = systemUnderTest.createRow(asciiCode, columns);
+
+        //then
+        Assert.assertEquals(actual, expected);
+    }
+
+    @DataProvider
+    private Object[][] asciiCodes() {
+        return new Object[][] {
+                {65, "A ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n"},
+                {66, "B ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n"},
+                {67, "C ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n"},
+                {68, "D ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n"},
+                {69, "E ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n"},
+                {70, "F ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n"},
+                {71, "G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n"},
+                {72, "H ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n"},
+        };
+    }
 }

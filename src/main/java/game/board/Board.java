@@ -25,4 +25,8 @@ class Board {
                 .mapToObj(String::valueOf)
                 .collect(joining(" "));
     }
+
+    String createRow(int letterCode, int columns) {
+        return (char) letterCode + " ~".repeat(columns) + "\n";
+    }
 }
