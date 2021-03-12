@@ -11,10 +11,10 @@ import java.io.PrintStream;
 public class BoardTest {
 
     private Board systemUnderTest;
-
+    private final int size = 10;
     @BeforeMethod
     public void setUp() {
-        systemUnderTest = new Board();
+        systemUnderTest = new Board(size);
     }
 
     @Test
@@ -65,11 +65,8 @@ public class BoardTest {
 
     @Test(dataProvider = "asciiCodes")
     public void createRow_returnRowAsString_forGivenSizeAndAsciiCode(int asciiCode, String expected) {
-        //given
-        int columns = 10;
-
         //when
-        String actual = systemUnderTest.createRow(asciiCode, columns);
+        String actual = systemUnderTest.createRow(asciiCode, size);
 
         //then
         Assert.assertEquals(actual, expected);
@@ -92,7 +89,6 @@ public class BoardTest {
     @Test
     public void createRows_returnBoardRows_forGivenSize() {
         //given
-        int size = 10;
         String expected = """
                         A ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
                         B ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
