@@ -88,4 +88,28 @@ public class BoardTest {
                 {72, "H ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n"},
         };
     }
+
+    @Test
+    public void createRows_returnBoardRows_forGivenSize() {
+        //given
+        int size = 10;
+        String expected = """
+                        A ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        B ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        C ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        D ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        E ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        F ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        H ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        J ~ ~ ~ ~ ~ ~ ~ ~ ~ ~     
+                        """;
+
+        //when
+        String actual = systemUnderTest.createRows(size);
+
+        //then
+        Assert.assertEquals(actual, expected);
+    }
 }
