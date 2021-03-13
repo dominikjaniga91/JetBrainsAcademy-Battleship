@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Arrays;
 
 public class BoardTest {
 
@@ -66,10 +67,10 @@ public class BoardTest {
     @Test(dataProvider = "asciiCodes")
     public void createRow_returnRowAsString_forGivenSizeAndAsciiCode(int asciiCode, String expected) {
         //when
-        String actual = systemUnderTest.createRow(asciiCode, size);
+        Row actual = systemUnderTest.createRow(asciiCode, size);
 
         //then
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(actual.toString(), expected);
     }
 
     @DataProvider
@@ -90,22 +91,22 @@ public class BoardTest {
     public void createRows_returnBoardRows_forGivenSize() {
         //given
         String expected = """
-                        A ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-                        B ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-                        C ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-                        D ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-                        E ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-                        F ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-                        G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-                        H ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-                        I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-                        J ~ ~ ~ ~ ~ ~ ~ ~ ~ ~     
-                        """;
+                        [A ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        , B ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        , C ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        , D ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        , E ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        , F ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        , G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        , H ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        , I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        , J ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        ]""";
 
         //when
-        String actual = systemUnderTest.createRows(size);
+        Row[] actual = systemUnderTest.createRows(size);
 
         //then
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(Arrays.toString(actual), expected);
     }
 }
