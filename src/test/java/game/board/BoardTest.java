@@ -104,7 +104,7 @@ public class BoardTest {
                         ]""";
 
         //when
-        Row[] actual = systemUnderTest.createRows(size);
+        Row[] actual = systemUnderTest.createRows();
 
         //then
         Assert.assertEquals(Arrays.toString(actual), expected);

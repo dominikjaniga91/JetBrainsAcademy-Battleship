@@ -13,7 +13,7 @@ class Board {
 
     public Board(int size) {
         this.size = size;
-        this.rows = createRows(10);
+        this.rows = createRows();
     }
 
     public void print() {
@@ -30,10 +30,10 @@ class Board {
                 .collect(joining(" "));
     }
 
-    Row[] createRows(int columns) {
+    Row[] createRows() {
         char firstLetter = 'A';
-        return range(0, columns)
-                .mapToObj(i -> createRow(firstLetter + i, columns))
+        return range(0, size)
+                .mapToObj(i -> createRow(firstLetter + i, i))
                 .toArray(Row[]::new);
     }
 
