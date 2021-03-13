@@ -125,4 +125,27 @@ public class BoardTest {
         //then
         Assert.assertEquals(outputStream.toString(), expected);
     }
+
+    @Test
+    public void setShipVertically_createShip_forGivenPositions() {
+        //given
+        Board board = new Board(5);
+        var outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        String expected = """
+                          1 2 3 4 5
+                        A ~ ~ ~ ~ ~
+                        B ~ 0 ~ ~ ~
+                        C ~ 0 ~ ~ ~
+                        D ~ 0 ~ ~ ~
+                        E ~ ~ ~ ~ ~
+                        """;
+
+        //when
+        board.setShipVertically("B2", "D2");
+        board.print();
+
+        //then
+        Assert.assertEquals(outputStream.toString(), expected);
+    }
 }

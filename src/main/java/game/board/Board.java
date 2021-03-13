@@ -77,4 +77,23 @@ class Board {
         }
 
     }
+
+    void setShipVertically(String begin, String end) {
+        int column = getColumnIndex(begin);
+        int beginRow = getRowIndex(begin);
+        int endRow = getRowIndex(end);
+
+        for (int i = beginRow; i <= endRow ; i++) {
+            fields[i][column].markField();
+        }
+    }
+
+    private int getColumnIndex(String begin) {
+        return Integer.parseInt(begin.replaceAll("\\D", "")) - ARRAY_OFFSET;
+    }
+
+    private int getRowIndex(String begin) {
+        String beginRowLetter = String.valueOf(begin.charAt(0));
+        return Rows.valueOf(beginRowLetter).getIndex();
+    }
 }
