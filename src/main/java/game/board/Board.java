@@ -45,4 +45,17 @@ class Board {
         }
         return fields;
     }
+
+    boolean markField(int row, int column) {
+        if (row > size || row < size || column < size || column > size) {
+            return false;
+        }
+
+        Field field = fields[row][column];
+        if (field.isEmpty()) {
+            field.markField();
+            return true;
+        }
+        return false;
+    }
 }
