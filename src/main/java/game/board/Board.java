@@ -1,27 +1,21 @@
 package game.board;
 
-import java.util.Arrays;
-
 import static java.util.stream.Collectors.joining;
-import static java.util.stream.IntStream.range;
 import static java.util.stream.IntStream.rangeClosed;
 
 class Board {
 
     private final int size;
-    private final Row[] rows;
+    private final Field[][] fields;
+    private final char rowFirstLetter = 'A';
 
     public Board(int size) {
         this.size = size;
-        this.rows = createRows();
+        this.fields = createBoard();
     }
 
     public void print() {
-        String rows = Arrays.toString(this.rows)
-                .replace(", ", "")
-                .replace("[", "")
-                .replace("]", "");;
-        System.out.printf("  %s%n%s", createHeader(10), rows);
+        System.out.printf("  %s%n%s", createHeader(size), getBoardAsString());
     }
 
     String createHeader(int columns) {
@@ -30,17 +24,25 @@ class Board {
                 .collect(joining(" "));
     }
 
-    Row[] createRows() {
-        char firstLetter = 'A';
-        return range(0, size)
-                .mapToObj(i -> createRow(firstLetter + i, i))
-                .toArray(Row[]::new);
+    String getBoardAsString() {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < fields.length; i++) {
+            builder.append((char) (rowFirstLetter + i));
+            for (Field field : fields[i]) {
+                builder.append(field);
+            }
+            builder.append("\n");
+        }
+        return builder.toString();
     }
 
-    Row createRow(int letterCode, int row) {
-        Field[] fields = range(0, size)
-                .mapToObj(column -> new Field(row, column))
-                .toArray(Field[]::new);
-        return new Row(letterCode, fields);
+    Field[][] createBoard() {
+        Field[][] fields = new Field[size][size];
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                fields[i][j] = new Field();
+            }
+        }
+        return fields;
     }
 }

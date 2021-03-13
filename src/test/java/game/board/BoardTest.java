@@ -7,12 +7,12 @@ import org.testng.annotations.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.Arrays;
 
 public class BoardTest {
 
     private Board systemUnderTest;
     private final int size = 10;
+
     @BeforeMethod
     public void setUp() {
         systemUnderTest = new Board(size);
@@ -56,57 +56,50 @@ public class BoardTest {
     @DataProvider
     private Object[][] sizes() {
         return new Object[][] {
-            {4, "1 2 3 4"},
-            {6, "1 2 3 4 5 6"},
-            {1, "1"},
-            {10, "1 2 3 4 5 6 7 8 9 10"},
-            {11, "1 2 3 4 5 6 7 8 9 10 11"},
+                {4, "1 2 3 4"},
+                {6, "1 2 3 4 5 6"},
+                {1, "1"},
+                {10, "1 2 3 4 5 6 7 8 9 10"},
+                {11, "1 2 3 4 5 6 7 8 9 10 11"},
         };
     }
+    @Test
+    public void getBoardAsString_returnBoard_forGivenSize() {
+        //given
+        String expected = """
+                        A ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        B ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        C ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        D ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        E ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        F ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        H ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+                        J ~ ~ ~ ~ ~ ~ ~ ~ ~ ~     
+                        """;
 
-    @Test(dataProvider = "asciiCodes")
-    public void createRow_returnRowAsString_forGivenSizeAndAsciiCode(int asciiCode, String expected) {
         //when
-        Row actual = systemUnderTest.createRow(asciiCode, size);
+        String actual = systemUnderTest.getBoardAsString();
 
         //then
-        Assert.assertEquals(actual.toString(), expected);
-    }
-
-    @DataProvider
-    private Object[][] asciiCodes() {
-        return new Object[][] {
-                {65, "A ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n"},
-                {66, "B ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n"},
-                {67, "C ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n"},
-                {68, "D ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n"},
-                {69, "E ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n"},
-                {70, "F ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n"},
-                {71, "G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n"},
-                {72, "H ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n"},
-        };
+        Assert.assertEquals(actual, expected, "Boards should be the same");
     }
 
     @Test
-    public void createRows_returnBoardRows_forGivenSize() {
+    public void createBoard_returnMultiDimensionalArrayOfFields_forGivenInput() {
         //given
-        String expected = """
-                        [A ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-                        , B ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-                        , C ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-                        , D ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-                        , E ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-                        , F ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-                        , G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-                        , H ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-                        , I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-                        , J ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-                        ]""";
+        Board board = new Board(3);
+        Field[][] expected = new Field[][] {
+                {new Field(), new Field(), new Field(),},
+                {new Field(), new Field(), new Field(),},
+                {new Field(), new Field(), new Field(),},
+        };
 
         //when
-        Row[] actual = systemUnderTest.createRows();
+        Field[][] actual = board.createBoard();
 
         //then
-        Assert.assertEquals(Arrays.toString(actual), expected);
+        Assert.assertEquals(actual, expected, "Arrays should be the same");
     }
 }
