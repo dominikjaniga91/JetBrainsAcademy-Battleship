@@ -13,7 +13,7 @@ class Board {
     }
 
     public void print() {
-        System.out.printf("%s%n%s", createHeader(10), createRows(10));
+        System.out.printf("  %s%n%s", createHeader(10), createRows(10));
     }
 
     String createHeader(int columns) {
