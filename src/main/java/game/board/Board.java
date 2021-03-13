@@ -67,10 +67,9 @@ class Board {
     }
 
     void setShipHorizontally(String begin, String end) {
-        String rowLetter = String.valueOf(begin.charAt(0));
-        int rowIndex = Rows.valueOf(rowLetter).getIndex();
-        int beginColumn = Integer.parseInt(begin.replace(rowLetter, "")) - ARRAY_OFFSET;
-        int endColumn = Integer.parseInt(end.replace(rowLetter, "")) - ARRAY_OFFSET;
+        int rowIndex = getRowIndex(begin);
+        int beginColumn = getColumnIndex(begin);
+        int endColumn = getColumnIndex(end);
 
         for (int i = beginColumn; i <= endColumn ; i++) {
             fields[rowIndex][i].markField();
