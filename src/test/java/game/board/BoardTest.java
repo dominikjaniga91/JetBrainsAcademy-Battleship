@@ -102,4 +102,27 @@ public class BoardTest {
         //then
         Assert.assertEquals(actual, expected, "Arrays should be the same");
     }
+
+    @Test
+    public void setShipHorizontally_createShip_forGivenPositions() {
+        //given
+        Board board = new Board(5);
+        var outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        String expected = """
+                          1 2 3 4 5
+                        A ~ ~ ~ ~ ~
+                        B ~ ~ ~ ~ ~
+                        C ~ 0 0 0 ~
+                        D ~ ~ ~ ~ ~
+                        E ~ ~ ~ ~ ~
+                        """;
+
+        //when
+        board.setShipHorizontally("C2", "C4");
+        board.print();
+
+        //then
+        Assert.assertEquals(outputStream.toString(), expected);
+    }
 }

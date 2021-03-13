@@ -8,6 +8,7 @@ class Board {
     private final int size;
     private final Field[][] fields;
     private final char rowFirstLetter = 'A';
+    private final static int ARRAY_OFFSET = 1;
 
     public Board(int size) {
         this.size = size;
@@ -57,5 +58,23 @@ class Board {
             return true;
         }
         return false;
+    }
+
+    void createShip(String begin, String end) {
+        if (begin.charAt(0) == end.charAt(0)) {
+            setShipHorizontally(begin, end);
+        }
+    }
+
+    void setShipHorizontally(String begin, String end) {
+        String rowLetter = String.valueOf(begin.charAt(0));
+        int rowIndex = Rows.valueOf(rowLetter).getIndex();
+        int beginColumn = Integer.parseInt(begin.replace(rowLetter, "")) - ARRAY_OFFSET;
+        int endColumn = Integer.parseInt(end.replace(rowLetter, "")) - ARRAY_OFFSET;
+
+        for (int i = beginColumn; i <= endColumn ; i++) {
+            fields[rowIndex][i].markField();
+        }
+
     }
 }
