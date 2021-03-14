@@ -63,6 +63,10 @@ class Board {
     void createShip(String begin, String end) {
         if (begin.charAt(0) == end.charAt(0)) {
             setShipHorizontally(begin, end);
+        } else if (removeLetters(begin).equals(removeLetters(end))) {
+            setShipVertically(begin, end);
+        } else {
+            throw new IllegalArgumentException();
         }
     }
 
@@ -73,6 +77,7 @@ class Board {
 
         for (int i = beginColumn; i <= endColumn ; i++) {
             fields[rowIndex][i].markField();
+            markOppositeFieldsAsOccupied(rowIndex, i);
         }
 
     }
@@ -84,15 +89,37 @@ class Board {
 
         for (int i = beginRow; i <= endRow ; i++) {
             fields[i][column].markField();
+            markOppositeFieldsAsOccupied(i, column);
         }
     }
 
     private int getColumnIndex(String begin) {
-        return Integer.parseInt(begin.replaceAll("\\D", "")) - ARRAY_OFFSET;
+        return Integer.parseInt(removeLetters(begin)) - ARRAY_OFFSET;
+    }
+
+    private String removeLetters(String begin) {
+        return begin.replaceAll("\\D", "");
     }
 
     private int getRowIndex(String begin) {
         String beginRowLetter = String.valueOf(begin.charAt(0));
         return Rows.valueOf(beginRowLetter).getIndex();
     }
+
+    private void markOppositeFieldsAsOccupied(int row, int column) {
+        int startRow = row == 0 ? row : row - 1;
+        int startColumn = column == 0 ? column : column - 1;
+        for (int i = startRow; i <= startRow + 2 ; i++) {
+            if (startRow >= size) {
+                break;
+            }
+            for (int j = startColumn; j <= startColumn + 2 ; j++) {
+                if (startColumn >= size) {
+                    break;
+                }
+                fields[i][j].markAsOccupied();
+            }
+        }
+    }
 }
+
