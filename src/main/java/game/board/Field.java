@@ -12,6 +12,7 @@ import java.util.Objects;
 class Field {
 
     private String value = " ~";
+    private boolean isOccupied = false;
 
     @Override
     public String toString() {
@@ -20,6 +21,7 @@ class Field {
 
     public void markField() {
         value = " 0";
+        isOccupied = true;
     }
 
     boolean isEmpty() {
@@ -37,5 +39,9 @@ class Field {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    public void markAsOccupied() {
+        isOccupied = true;
     }
 }
