@@ -44,4 +44,8 @@ class Field {
     public void markAsOccupied() {
         isOccupied = true;
     }
+
+    public boolean isOccupied() {
+        return isOccupied;
+    }
 }
