@@ -148,4 +148,17 @@ public class BoardTest {
         //then
         Assert.assertEquals(outputStream.toString(), expected);
     }
+
+    @Test
+    public void markOppositeFieldsAsOccupied_markAllFieldsOnBoard_forBoardWithNineFields() {
+        //given
+        Board board = new Board(3);
+
+        //when
+        board.markOppositeFieldsAsOccupied(1, 1);
+        boolean actual = board.fieldStream().allMatch(Field::isOccupied);
+
+        //then
+        Assert.assertTrue(actual, "All fields should be occupied");
+    }
 }

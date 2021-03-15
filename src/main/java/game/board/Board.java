@@ -1,5 +1,7 @@
 package game.board;
 
+import java.util.Arrays;
+import java.util.stream.Stream;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.IntStream.rangeClosed;
 
@@ -106,7 +108,7 @@ class Board {
         return Rows.valueOf(beginRowLetter).getIndex();
     }
 
-    private void markOppositeFieldsAsOccupied(int row, int column) {
+    void markOppositeFieldsAsOccupied(int row, int column) {
         int startRow = row == 0 ? row : row - 1;
         int startColumn = column == 0 ? column : column - 1;
         for (int i = startRow; i <= startRow + 2 ; i++) {
@@ -120,6 +122,10 @@ class Board {
                 fields[i][j].markAsOccupied();
             }
         }
+    }
+
+    public Stream<Field> fieldStream() {
+        return Arrays.stream(fields).flatMap(Stream::of);
     }
 }
 
