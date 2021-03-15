@@ -34,4 +34,22 @@ public class InputValidatorTest {
                 {3, 7},
         };
     }
+
+    @Test(dataProvider = "rowPositions")
+    public void doesNotHaveDiagonalPosition_returnTrue_forCoordinatesInRow(int beginRow, int beginColumn, int endRow, int endColumn) {
+        //given
+        boolean actual = systemUnderTest.doesNotHaveDiagonalPosition(beginRow, beginColumn, endRow, endColumn);
+
+        //then
+        Assert.assertTrue(actual, "Method should return true");
+    }
+
+    @DataProvider
+    private Object[][] rowPositions() {
+        return new Object[][]{
+                {1, 1, 1, 5},
+                {2, 3, 2, 3},
+                {3, 4, 3, 6},
+        };
+    }
 }
