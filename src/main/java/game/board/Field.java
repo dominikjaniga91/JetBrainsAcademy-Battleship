@@ -13,6 +13,8 @@ class Field {
 
     private String value = " ~";
     private boolean isOccupied = false;
+    private int row;
+    private int column;
 
     @Override
     public String toString() {
@@ -24,6 +26,13 @@ class Field {
         isOccupied = true;
     }
 
+    Field(){}
+
+    Field(int row, int column) {
+        this.row = row;
+        this.column = column;
+    }
+
     boolean isEmpty() {
         return !"0".equals(value);
     }
@@ -33,7 +42,9 @@ class Field {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Field field = (Field) o;
-        return Objects.equals(value, field.value);
+        return row == field.row &&
+                column == field.column &&
+                Objects.equals(value, field.value);
     }
 
     @Override
