@@ -33,4 +33,30 @@ public class FieldTest {
                 {1,4},
         };
     }
+
+    @Test(dataProvider = "invalidRowsAndColumns")
+    public void isInBoardRange_returnFalse_whenFieldIsNotLocatedInBoard(int row, int column) {
+        //given
+        Field field = new Field(row, column);
+
+        //when
+        boolean actual = field.isInBoardRange(10);
+
+        //then
+        Assert.assertFalse(actual, "Method should return false");
+    }
+
+    @DataProvider
+    public static Object[][] invalidRowsAndColumns() {
+        return new Object[][]{
+                {-1,-1},
+                {3,-8},
+                {-9,1},
+                {0,-4},
+                {11,0},
+                {11,11},
+                {13,13},
+                {-8,-2},
+        };
+    }
 }
