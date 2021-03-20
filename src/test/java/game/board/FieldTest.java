@@ -6,6 +6,18 @@ import org.testng.annotations.Test;
 
 public class FieldTest {
 
+    @Test
+    public void isEmpty_returnTrue_forAnEmptyField() {
+        //given
+        Field field = new Field();
+
+        //when
+        boolean actual = field.isEmpty();
+
+        //then
+        Assert.assertTrue(actual, "Method should return true");
+    }
+
 
     @Test(dataProvider = "rowsAndColumns")
     public void isInBoardRange_returnTrue_whenFieldIsLocatedInBoard(int row, int column) {

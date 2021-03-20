@@ -34,7 +34,7 @@ class Field {
     }
 
     boolean isEmpty() {
-        return !"0".equals(value);
+        return !" 0".equals(value);
     }
 
     @Override
