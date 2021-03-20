@@ -59,4 +59,8 @@ class Field {
     public boolean isOccupied() {
         return isOccupied;
     }
+
+    boolean isInBoardRange(int boardSize) {
+        return row < boardSize && row >= 0 && column < boardSize && column >= 0;
+    }
 }
