@@ -71,4 +71,11 @@ class Field {
     public boolean hasTheSameColumnAs(Field endField) {
         return this.column == endField.column;
     }
+
+    int getLengthToOtherField(Field other) {
+        if (this.row == other.row) {
+            return Math.abs(other.column - this.column + 1);
+        }
+        return Math.abs(other.row - this.row + 1);
+    }
 }

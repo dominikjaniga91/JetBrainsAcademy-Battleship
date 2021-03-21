@@ -159,4 +159,24 @@ public class FieldTest {
                 {3, 5, 4, 1},
         };
     }
+
+    @Test(dataProvider = "fieldsAndLengths")
+    public void getLengthToOtherField_returnLengthBetweenFields_forGivenTwoFields(Field startField, Field endField, int expected) {
+        //when
+        int actual = startField.getLengthToOtherField(endField);
+
+        //then
+        Assert.assertEquals(actual, expected, "The lengths should be the same");
+    }
+
+    @DataProvider
+    public static Object[][] fieldsAndLengths() {
+        return new Object[][]{
+                {new Field(1,1),  new Field(1,4), 4},
+                {new Field(1,1),  new Field(5,1), 5},
+                {new Field(3,1),  new Field(3,4), 4},
+                {new Field(2,2),  new Field(3,2), 2},
+                {new Field(3,5),  new Field(3,7), 3},
+        };
+    }
 }
