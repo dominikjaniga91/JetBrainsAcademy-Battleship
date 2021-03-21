@@ -117,7 +117,7 @@ public class FieldTest {
     }
 
     @Test(dataProvider = "theSameColumns")
-    public void hasTheSameColumnAs_returnFalse_whenTwoFieldsHasTheSameColumn(int beginRow, int beginColumn, int endRow, int endColumn) {
+    public void hasTheSameColumnAs_returnTrue_whenTwoFieldsHasTheSameColumn(int beginRow, int beginColumn, int endRow, int endColumn) {
         //given
         Field startField = new Field(beginRow, beginColumn);
         Field endField = new Field(endRow, endColumn);
@@ -126,7 +126,7 @@ public class FieldTest {
         boolean actual = startField.hasTheSameColumnAs(endField);
 
         //then
-        Assert.assertTrue(actual, "Method should return false");
+        Assert.assertTrue(actual, "Method should return true");
     }
 
     @DataProvider
@@ -135,6 +135,28 @@ public class FieldTest {
                 {3, 1, 1, 1},
                 {2, 4, 1, 4},
                 {3, 5, 4, 5},
+        };
+    }
+
+    @Test(dataProvider = "notTheSameColumns")
+    public void hasTheSameColumnAs_returnFalse_whenTwoFieldsHasNotTheSameColumn(int beginRow, int beginColumn, int endRow, int endColumn) {
+        //given
+        Field startField = new Field(beginRow, beginColumn);
+        Field endField = new Field(endRow, endColumn);
+
+        //when
+        boolean actual = startField.hasTheSameColumnAs(endField);
+
+        //then
+        Assert.assertFalse(actual, "Method should return false");
+    }
+
+    @DataProvider
+    private Object[][] notTheSameColumns() {
+        return new Object[][] {
+                {3, 1, 1, 4},
+                {2, 4, 1, 7},
+                {3, 5, 4, 1},
         };
     }
 }
