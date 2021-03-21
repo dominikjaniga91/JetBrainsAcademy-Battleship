@@ -63,4 +63,8 @@ class Field {
     boolean isInBoardRange(int boardSize) {
         return row < boardSize && row >= 0 && column < boardSize && column >= 0;
     }
+
+    public boolean hasTheSameRowAs(Field endField) {
+        return this.row == endField.row;
+    }
 }
