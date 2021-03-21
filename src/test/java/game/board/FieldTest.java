@@ -93,4 +93,26 @@ public class FieldTest {
                 {3, 5, 3, 7},
         };
     }
+
+    @Test(dataProvider = "notTheSameRows")
+    public void hasTheSameRowAs_returnFalse_whenTwoFieldsHasNotTheSameRow(int beginRow, int beginColumn, int endRow, int endColumn) {
+        //given
+        Field startField = new Field(beginRow, beginColumn);
+        Field endField = new Field(endRow, endColumn);
+
+        //when
+        boolean actual = startField.hasTheSameRowAs(endField);
+
+        //then
+        Assert.assertFalse(actual, "Method should return false");
+    }
+
+    @DataProvider
+    private Object[][] notTheSameRows() {
+        return new Object[][] {
+                {3, 1, 1, 4},
+                {2, 4, 1, 8},
+                {3, 5, 4, 7},
+        };
+    }
 }
