@@ -67,4 +67,8 @@ class Field {
     public boolean hasTheSameRowAs(Field endField) {
         return this.row == endField.row;
     }
+
+    public boolean hasTheSameColumnAs(Field endField) {
+        return this.column == endField.column;
+    }
 }
